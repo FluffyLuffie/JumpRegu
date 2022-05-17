@@ -8,7 +8,7 @@
 [ext_resource path="res://soundEffects/land.wav" type="AudioStream" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6, 11 )
+extents = Vector2( 4, 11 )
 
 [node name="Regu" type="KinematicBody2D"]
 script = ExtResource( 1 )

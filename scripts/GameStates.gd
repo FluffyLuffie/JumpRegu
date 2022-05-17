@@ -17,7 +17,7 @@ func _ready():
 	game_vp = get_node("/root/GameWorld/ViewportContainer/Viewport")
 	current_level = get_node("/root/GameWorld/ViewportContainer/Viewport/Level0_0")
 
-func load_level(delta_x:int, delta_y:int):
+func load_level(delta_x:int, delta_y:int) -> bool:
 	var next_level_x:int = level_x + delta_x
 	var next_level_y:int = level_y + delta_y
 	var next_level_path = "res://scenes/levels/Level" + str(next_level_x) + "_" + str(next_level_y) + ".tscn"
@@ -30,3 +30,5 @@ func load_level(delta_x:int, delta_y:int):
 		current_level = load(next_level_path).instance()
 		game_vp.add_child(current_level)
 		game_vp.move_child(current_level, 1)
+		return true
+	return false
