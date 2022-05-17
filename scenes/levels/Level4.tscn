@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="Level4" type="Node2D"]
+
+[node name="Background" type="Sprite" parent="."]
+
+[node name="Foreground" type="Sprite" parent="."]

@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/Regu.gd" type="Script" id=1]
 [ext_resource path="res://sprites/regu.png" type="Texture" id=2]
+[ext_resource path="res://soundEffects/bump.wav" type="AudioStream" id=3]
+[ext_resource path="res://soundEffects/jump.wav" type="AudioStream" id=4]
+[ext_resource path="res://soundEffects/splat.wav" type="AudioStream" id=5]
+[ext_resource path="res://soundEffects/land.wav" type="AudioStream" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10, 11 )
+extents = Vector2( 6, 11 )
 
 [node name="Regu" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -17,3 +21,21 @@ region_rect = Rect2( 32, 32, 32, 32 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="SoundJump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -4.0
+bus = "SoundEffects"
+
+[node name="SoundLand" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+bus = "SoundEffects"
+
+[node name="SoundBump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+bus = "SoundEffects"
+
+[node name="SoundSplat" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = 8.0
+bus = "SoundEffects"
