@@ -10,7 +10,7 @@ config_version=4
 
 [application]
 
-config/name="ReguJump"
+config/name="JumpRegu"
 run/main_scene="res://scenes/GameWorld.tscn"
 config/icon="res://icon.png"
 

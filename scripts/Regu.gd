@@ -13,7 +13,8 @@ var jump_speed:float = 150
 var min_jump_speed:float = 100.0
 var max_jump_speed:float = 475.0
 var max_jump_charge:int = 30
-var terminal_velocity:float = 750.0
+var terminal_velocity:float = 450.0
+var fall_splat_frames: int = 80
 
 var velocity:Vector2 = Vector2()
 var jump_charging:bool = false
@@ -22,18 +23,22 @@ var sliding:bool = false
 
 var state = State.idle
 var animation_timer:float = 0.0
+var falling_frames: int = 0
 
 # warning-ignore:unused_argument
 func _process(delta):
 	if state < 2:
-		sprite.region_rect.position = Vector2((int(animation_timer * 6) % 4 + 1) * 32, (state + 1) * 32)
+		sprite.region_rect.position = Vector2((int(animation_timer * 4) % 4) * 32, state * 32)
 	else:
-		sprite.region_rect.position = Vector2(32, (state + 1) * 32)
+		sprite.region_rect.position = Vector2(0, state * 32)
 	animation_timer += delta
 
 func _physics_process(delta):
+	# warning-ignore:return_value_discarded
+	var next_velocity: Vector2 = move_and_slide(velocity, Vector2.UP)
+	
 	if Input.is_action_just_pressed("jump"):
-			jump_charging = true
+		jump_charging = true
 	
 	sliding = false
 	if is_on_floor():
@@ -41,7 +46,7 @@ func _physics_process(delta):
 		if get_floor_normal().x == 0.0:
 			#if falling fast, splat
 			if state == State.fall or state == State.stun:
-				if velocity.y >= terminal_velocity:
+				if falling_frames >= fall_splat_frames:
 					soundSplat.play()
 					state = State.splat
 				else:
@@ -82,12 +87,14 @@ func _physics_process(delta):
 		else:
 			sliding = true
 			state = State.stun
-			velocity.y = min(velocity.y + GameStates.gravity * delta / 2.0, terminal_velocity / 2.0)
+			velocity.y = min(next_velocity.y + GameStates.gravity * delta / 2.0, terminal_velocity / 2.0)
 			#if slide right
 			if get_floor_normal().x > 0.0:
-				velocity.x = min(velocity.x + GameStates.gravity * delta / 2.0, terminal_velocity / 2.0)
+				velocity.x = min(next_velocity.x + GameStates.gravity * delta / 2.0, terminal_velocity / 2.0)
 			else:
-				velocity.x = max(velocity.x - GameStates.gravity * delta / 2.0, -terminal_velocity / 2.0)
+				velocity.x = max(next_velocity.x - GameStates.gravity * delta / 2.0, -terminal_velocity / 2.0)
+		
+		falling_frames = 0
 			
 	else:
 		jump_charge = 0
@@ -105,14 +112,15 @@ func _physics_process(delta):
 				state = State.rise
 			else:
 				state = State.fall
+		
+		if velocity.y >= 0.0:
+			falling_frames += 1
 	
 	if !sliding:
 		velocity.y += GameStates.gravity * delta
 	velocity.y = min(velocity.y, terminal_velocity)
 	
-# warning-ignore:return_value_discarded
-	move_and_slide(velocity, Vector2.UP)
-	
+	# move to next level if valid
 	var valid_x = true
 	if position.x < -GameStates.level_width / 2.0:
 		if GameStates.load_level(-1, 0):

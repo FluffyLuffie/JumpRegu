@@ -8,16 +8,16 @@
 [ext_resource path="res://soundEffects/land.wav" type="AudioStream" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 3, 11 )
+extents = Vector2( 4, 10 )
 
 [node name="Regu" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
-offset = Vector2( 0, -5 )
+offset = Vector2( 0, -6 )
 region_enabled = true
-region_rect = Rect2( 32, 32, 32, 32 )
+region_rect = Rect2( 0, 0, 32, 32 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -29,6 +29,7 @@ bus = "SoundEffects"
 
 [node name="SoundLand" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+volume_db = -0.125
 bus = "SoundEffects"
 
 [node name="SoundBump" type="AudioStreamPlayer" parent="."]
