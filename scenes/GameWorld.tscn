@@ -34,7 +34,6 @@ zoom = Vector2( 0.333, 0.333 )
 [node name="1_0" parent="ViewportContainer/Viewport" instance=ExtResource( 2 )]
 
 [node name="Regu" parent="ViewportContainer/Viewport" instance=ExtResource( 1 )]
-position = Vector2( -60.997, 0 )
 
 [node name="SettingsUI" type="Control" parent="."]
 pause_mode = 2
