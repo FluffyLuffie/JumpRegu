@@ -1,21 +1,31 @@
 extends Node
 
+var starting_level_x: int = 1
+var starting_level_y: int = 0
+var starting_pos: Vector2 = Vector2(0, 0)
+
 var directory = Directory.new()
 
-var game_vp
+var game_vp: Viewport
+var player: KinematicBody2D
 
 var gravity:float = 700
 var level_height:float = 360.0
 var level_width:float = 640.0
 
-var level_x:int = 1
-var level_y:int = 0
+var level_x:int
+var level_y:int
 var current_level
 
-#move somewhere else?
 func _ready():	
 	game_vp = get_node("/root/GameWorld/ViewportContainer/Viewport")
-	current_level = get_node("/root/GameWorld/ViewportContainer/Viewport/1_0")
+	
+	player = load("res://scenes/Regu.tscn").instance()
+	player.position = starting_pos
+	game_vp.add_child(player)
+	
+	# warning-ignore:return_value_discarded
+	load_level(starting_level_x, starting_level_y)
 
 func load_level(delta_x:int, delta_y:int) -> bool:
 	var next_level_x:int = level_x + delta_x
@@ -23,7 +33,9 @@ func load_level(delta_x:int, delta_y:int) -> bool:
 	var next_level_path = "res://scenes/levels/" + str(next_level_x) + "_" + str(next_level_y) + ".tscn"
 	
 	if directory.file_exists(next_level_path):
-		current_level.queue_free()
+		if current_level:
+			game_vp.remove_child(current_level)
+			current_level.queue_free()
 		
 		level_x = next_level_x
 		level_y = next_level_y

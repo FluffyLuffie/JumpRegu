@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+# not the most beautiful code, but it does work (most of the time)
+
 enum State{idle, walk, charge, rise, fall, stun, splat}
 
 onready var sprite = $Sprite
@@ -11,7 +13,7 @@ onready var soundSplat = $SoundSplat
 var walk_speed:float = 75
 var jump_speed:float = 150
 var min_jump_speed:float = 100.0
-var max_jump_speed:float = 475.0
+var max_jump_speed:float = 450.0
 var max_jump_charge:int = 30
 var terminal_velocity:float = 450.0
 var fall_splat_frames: int = 80
@@ -33,6 +35,10 @@ func _process(delta):
 	animation_timer += delta
 
 func _physics_process(delta):
+	if Input.is_action_just_pressed("teleport"):
+		position = get_global_mouse_position()
+	
+	
 	# warning-ignore:return_value_discarded
 	var next_velocity: Vector2 = move_and_slide(velocity, Vector2.UP)
 	var last_col: KinematicCollision2D = get_last_slide_collision()
@@ -42,7 +48,7 @@ func _physics_process(delta):
 	
 	if last_col:
 		#if on flat ground
-		if last_col.normal.y == -1.0:
+		if (is_on_floor() and last_col.normal.y == 0.0) or (velocity.y >= 0.0 and last_col.normal.x == 0.0):
 			#if falling fast, splat
 			if state == State.fall or state == State.stun:
 				if falling_frames >= fall_splat_frames:
@@ -88,10 +94,10 @@ func _physics_process(delta):
 			soundBump.play()
 			state = State.stun
 			velocity.x = -velocity.x / 2.0
-			print(last_col.normal)
 		#if ceiling
-		elif is_on_ceiling() and velocity.y < 0.0:
+		elif is_on_ceiling():
 			soundBump.play()
+			state = State.stun
 			velocity.y = -velocity.y / 2.0
 		#if on slope
 		elif last_col.normal.y != 0.0:
@@ -105,9 +111,7 @@ func _physics_process(delta):
 			else:
 				velocity.x = max(next_velocity.x - GameStates.gravity * delta / 3.0, -terminal_velocity / 3.0)
 			
-	else:
-		jump_charge = 0
-			
+	else:	
 		if state != State.stun:
 			if velocity.y < 0.0:
 				state = State.rise
@@ -116,6 +120,10 @@ func _physics_process(delta):
 		
 		if velocity.y >= 0.0:
 			falling_frames += 1
+			
+	if Input.is_action_just_released("jump"):
+		jump_charging = false
+		jump_charge = 0
 	
 	velocity.y += GameStates.gravity * delta
 	velocity.y = min(velocity.y, terminal_velocity)

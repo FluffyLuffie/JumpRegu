@@ -1,6 +1,5 @@
 extends Node2D
 
-onready var vpContainer = $ViewportContainer
 onready var settings:Control = $SettingsUI
 
 var paused:bool = false

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/PlayerLight.gd" type="Script" id=1]
+[ext_resource path="res://sprites/softCircle.png" type="Texture" id=2]
+
+[node name="PlayerLight" type="Light2D"]
+texture = ExtResource( 2 )
+color = Color( 0.862745, 0.780392, 0.686275, 1 )
+shadow_enabled = true
+script = ExtResource( 1 )
