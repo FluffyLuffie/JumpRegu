@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/Inari.gd" type="Script" id=1]
+[ext_resource path="res://sprites/inari.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="Animation" id=2]
+resource_name = "idle"
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 0, 32, 32 ), Rect2( 32, 0, 32, 32 ), Rect2( 64, 0, 32, 32 ), Rect2( 96, 0, 32, 32 ) ]
+}
+
+[node name="Inari" type="Area2D"]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+offset = Vector2( 0, -9 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -4 )
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/idle = SubResource( 2 )

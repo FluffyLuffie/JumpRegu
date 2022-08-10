@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://tilesets/grass.tres" type="TileSet" id=1]
+[ext_resource path="res://sprites/backgrounds/0.png" type="Texture" id=2]
+[ext_resource path="res://scenes/Truck.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Inari.tscn" type="PackedScene" id=4]
+
+[node name="2_11" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -589809, 0, 3, -524273, 0, 131075, -196599, 0, 3, -131063, 0, 131075, 262126, 0, 0, 262127, 0, 1, 262128, 0, 1, 262129, 0, 1, 262130, 0, 1, 262131, 0, 1, 262132, 0, 1, 262133, 0, 1, 262134, 0, 1, 262135, 0, 1, 262136, 0, 1, 262137, 0, 1, 262138, 0, 2, 196610, 0, 3, 327662, 0, 131072, 327663, 0, 131073, 327664, 0, 131073, 327665, 0, 131073, 327666, 0, 131073, 327667, 0, 131073, 327668, 0, 131073, 327669, 0, 131073, 327670, 0, 131073, 327671, 0, 131073, 327672, 0, 131073, 327673, 0, 131073, 327674, 0, 131074, 262146, 0, 131075, 655367, 0, 0, 655368, 0, 1, 655369, 0, 1, 655370, 0, 1, 655371, 0, 1, 655372, 0, 1, 655373, 0, 2, 720903, 0, 131072, 720904, 0, 131073, 720905, 0, 131073, 720906, 0, 131073, 720907, 0, 131073, 720908, 0, 131073, 720909, 0, 131074 )
+
+[node name="Truck" parent="." instance=ExtResource( 3 )]
+position = Vector2( -185, 18 )
+
+[node name="Inari" parent="." instance=ExtResource( 4 )]
+position = Vector2( -120, 41 )

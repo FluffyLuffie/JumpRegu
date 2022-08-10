@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/1-1.png-0f5cd1e46b9e33ece65b2b06eb13083e.stex"
+path="res://.import/inari.png-7648b33a2cc55033dde8640f4803640f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/stages/1-1.png"
-dest_files=[ "res://.import/1-1.png-0f5cd1e46b9e33ece65b2b06eb13083e.stex" ]
+source_file="res://sprites/inari.png"
+dest_files=[ "res://.import/inari.png-7648b33a2cc55033dde8640f4803640f.stex" ]
 
 [params]
 
