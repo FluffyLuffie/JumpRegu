@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/temp.png-3a668b681a1d699b3e5fb334cb478234.stex"
+path="res://.import/reguZeno.png-dbe25c5f765b90ce96df29745e18f0ce.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/temp.png"
-dest_files=[ "res://.import/temp.png-3a668b681a1d699b3e5fb334cb478234.stex" ]
+source_file="res://sprites/reguZeno.png"
+dest_files=[ "res://.import/reguZeno.png-dbe25c5f765b90ce96df29745e18f0ce.stex" ]
 
 [params]
 

@@ -26,18 +26,27 @@ func _physics_process(delta: float) -> void:
 		if GameStates.load_level(0, -1):
 			position.y -= GameStates.level_height
 			if GameStates.level_y == 0:
-				collision_layer = 1
+				collision_layer = 2
 				collision_mask = 1
 	
 func launch() -> void:
 	is_active = true
-	velocity = Vector2(20.0, -300.0)
+	velocity = Vector2(18.4, -400.0)
+	$AudioStreamPlayer.play()
 	get_parent().remove_child(self)
 	GameStates.game_vp.add_child(self)
 	GameStates.player = self
 	
 func explode() -> void:
-	GameStates.spawn_player(position)
-	collision_layer = 0
-	collision_mask = 0
+	var explosion: Node2D = load("res://scenes/Explosion.tscn").instance()
+	explosion.position = position
+	explosion.get_node('Particles2D').emitting = true
+	GameStates.game_vp.add_child(explosion)
+	
+	if !GameStates.cutscene:
+		GameStates.spawn_player(position)
+	else:
+		var credits = load("res://scenes/Credits.tscn").instance()
+		get_tree().root.add_child(credits)
+	
 	queue_free()

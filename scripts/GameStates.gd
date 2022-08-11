@@ -2,7 +2,7 @@ extends Node
 
 var starting_level_x: int = 2
 var starting_level_y: int = 11
-var starting_pos: Vector2 = Vector2(50, 0)
+var starting_pos: Vector2 = Vector2(0, 121)
 
 var directory = Directory.new()
 
@@ -16,6 +16,9 @@ var level_width:float = 640.0
 var level_x:int
 var level_y:int
 var current_level
+
+var cutscene: bool = false
+var chicken_cooked: bool = false
 
 func _ready():	
 	game_vp = get_node("/root/GameWorld/ViewportContainer/Viewport")

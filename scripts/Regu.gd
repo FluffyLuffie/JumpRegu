@@ -43,83 +43,85 @@ func _physics_process(delta):
 	var next_velocity: Vector2 = move_and_slide(velocity, Vector2.UP)
 	var last_col: KinematicCollision2D = get_last_slide_collision()
 	
-	if Input.is_action_just_pressed("jump"):
-		jump_charging = true
 	
-	if last_col:
-		#if on flat ground
-		if (is_on_floor() and last_col.normal.y == 0.0) or (velocity.y >= 0.0 and last_col.normal.x == 0.0):
-			#if falling fast, splat
-			if state == State.fall or state == State.stun:
-				if falling_frames >= fall_splat_frames:
-					soundSplat.play()
-					state = State.splat
-				else:
-					soundLand.play()
-			falling_frames = 0
-			
-			velocity = Vector2()
-			if jump_charging and Input.is_action_pressed("jump"):
-				if jump_charge < max_jump_charge:
-					jump_charge += 1
-					state = State.charge
-			else:
-				if jump_charging and Input.is_action_just_released("jump"):
-					soundJump.play()
-					velocity.y = -((float(jump_charge) / max_jump_charge) * (max_jump_speed - min_jump_speed) + min_jump_speed)
-					state = State.rise
-					if Input.is_action_pressed("right"):
-						velocity.x = jump_speed
-					if Input.is_action_pressed("left"):
-						velocity.x -= jump_speed
-				elif state != State.splat:
-					if Input.is_action_just_pressed("left") or Input.is_action_just_pressed("right"):
-						animation_timer = 0.0
-					
-					if Input.is_action_pressed("right"):
-						velocity.x = walk_speed
-					if Input.is_action_pressed("left"):
-						velocity.x -= walk_speed
-					
-					if velocity.x != 0.0:
-						state = State.walk
-					else:
-						state = State.idle
-			if velocity.x > 0.0:
-				sprite.flip_h = false
-			elif velocity.x < 0.0:
-				sprite.flip_h = true
-		# if wall hit in air
-		elif last_col.normal.y == 0.0 and velocity.x != 0.0 and not is_on_floor():
-			soundBump.play()
-			state = State.stun
-			velocity.x = -velocity.x / 2.0
-		#if ceiling
-		elif is_on_ceiling():
-			soundBump.play()
-			state = State.stun
-			velocity.y = -velocity.y / 2.0
-		#if on slope
-		elif last_col.normal.y != 0.0:
-			state = State.stun
-			falling_frames = 0
-			
-			velocity.y = min(next_velocity.y + GameStates.gravity * delta / 3.0, terminal_velocity / 3.0)
-			#if slide right
-			if get_floor_normal().x > 0.0:
-				velocity.x = min(next_velocity.x + GameStates.gravity * delta / 3.0, terminal_velocity / 3.0)
-			else:
-				velocity.x = max(next_velocity.x - GameStates.gravity * delta / 3.0, -terminal_velocity / 3.0)
-			
-	else:	
-		if state != State.stun:
-			if velocity.y < 0.0:
-				state = State.rise
-			else:
-				state = State.fall
+	if !GameStates.cutscene:
+		if Input.is_action_just_pressed("jump"):
+			jump_charging = true
 		
-		if velocity.y >= 0.0:
-			falling_frames += 1
+		if last_col:
+			#if on flat ground
+			if (is_on_floor() and last_col.normal.y == 0.0) or (velocity.y >= 0.0 and last_col.normal.x == 0.0):
+				#if falling fast, splat
+				if state == State.fall or state == State.stun:
+					if falling_frames >= fall_splat_frames:
+						soundSplat.play()
+						state = State.splat
+					else:
+						soundLand.play()
+				falling_frames = 0
+				
+				velocity = Vector2()
+				if jump_charging and Input.is_action_pressed("jump"):
+					if jump_charge < max_jump_charge:
+						jump_charge += 1
+						state = State.charge
+				else:
+					if jump_charging and Input.is_action_just_released("jump"):
+						soundJump.play()
+						velocity.y = -((float(jump_charge) / max_jump_charge) * (max_jump_speed - min_jump_speed) + min_jump_speed)
+						state = State.rise
+						if Input.is_action_pressed("right"):
+							velocity.x = jump_speed
+						if Input.is_action_pressed("left"):
+							velocity.x -= jump_speed
+					elif state != State.splat:
+						if Input.is_action_just_pressed("left") or Input.is_action_just_pressed("right"):
+							animation_timer = 0.0
+						
+						if Input.is_action_pressed("right"):
+							velocity.x = walk_speed
+						if Input.is_action_pressed("left"):
+							velocity.x -= walk_speed
+						
+						if velocity.x != 0.0:
+							state = State.walk
+						else:
+							state = State.idle
+				if velocity.x > 0.0:
+					sprite.flip_h = false
+				elif velocity.x < 0.0:
+					sprite.flip_h = true
+			# if wall hit in air
+			elif last_col.normal.y == 0.0 and velocity.x != 0.0 and not is_on_floor():
+				soundBump.play()
+				state = State.stun
+				velocity.x = -velocity.x / 2.0
+			#if ceiling
+			elif is_on_ceiling():
+				soundBump.play()
+				state = State.stun
+				velocity.y = -velocity.y / 2.0
+			#if on slope
+			elif last_col.normal.y != 0.0:
+				state = State.stun
+				falling_frames = 0
+				
+				velocity.y = min(next_velocity.y + GameStates.gravity * delta / 3.0, terminal_velocity / 3.0)
+				#if slide right
+				if get_floor_normal().x > 0.0:
+					velocity.x = min(next_velocity.x + GameStates.gravity * delta / 3.0, terminal_velocity / 3.0)
+				else:
+					velocity.x = max(next_velocity.x - GameStates.gravity * delta / 3.0, -terminal_velocity / 3.0)
+				
+		else:	
+			if state != State.stun:
+				if velocity.y < 0.0:
+					state = State.rise
+				else:
+					state = State.fall
+			
+			if velocity.y >= 0.0:
+				falling_frames += 1
 			
 	if Input.is_action_just_released("jump"):
 		jump_charging = false
@@ -153,3 +155,18 @@ func _physics_process(delta):
 	if position.y > GameStates.level_height / 2.0:
 		if GameStates.load_level(0, -1):
 			position.y -= GameStates.level_height
+			if GameStates.cutscene:
+				collision_layer = 1
+				collision_mask = 1
+
+func game_clear() -> void:
+	sprite.flip_h = true
+	position = Vector2(0.0, 121.0)
+	velocity = Vector2.ZERO
+	sprite.texture = load("res://sprites/reguZeno.png")
+	$AnimationPlayer.play('zenoJump')
+	
+func zeno_jump() -> void:
+	collision_layer = 0
+	collision_mask = 0
+	velocity = Vector2(-60.0, -450)
