@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bigChicken.png-fc480b246c49e29b9fb0a34a1d44462f.stex"
+path="res://.import/mishiro.png-66257df6c654c143ce44fe9ac29ea347.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/bigChicken.png"
-dest_files=[ "res://.import/bigChicken.png-fc480b246c49e29b9fb0a34a1d44462f.stex" ]
+source_file="res://sprites/mishiro.png"
+dest_files=[ "res://.import/mishiro.png-66257df6c654c143ce44fe9ac29ea347.stex" ]
 
 [params]
 

@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Regu",
+"language": "GDScript",
+"path": "res://scripts/Regu.gd"
+} ]
+_global_script_class_icons={
+"Regu": ""
+}
+
 [application]
 
 config/name="JumpRegu"

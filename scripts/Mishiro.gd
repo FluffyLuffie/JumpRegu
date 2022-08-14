@@ -1,5 +1,8 @@
 extends Area2D
 
+func _ready() -> void:
+	$White.global_position = Vector2.ZERO
+
 # warning-ignore:unused_argument
 func _on_BigChicken_body_entered(body: Node) -> void:
 	collision_layer = 0
@@ -11,4 +14,4 @@ func _on_BigChicken_body_entered(body: Node) -> void:
 func open():
 	$Sprite.modulate.a = 0.0
 	GameStates.player.game_clear()
-	GameStates.player.get_node('AnimationPlayer').play('zenoJump')
+	GameStates.player.state = Regu.State.zenoJump

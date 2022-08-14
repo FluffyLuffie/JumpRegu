@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scripts/Regu.gd" type="Script" id=1]
 [ext_resource path="res://sprites/regu.png" type="Texture" id=2]
@@ -10,9 +10,119 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 7 )
 
+[sub_resource type="Animation" id=4]
+resource_name = "charge"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 0, 64, 32, 32 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "fall"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 0, 128, 32, 32 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "idle"
+length = 2.0
+loop = true
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 0, 32, 32 ), Rect2( 32, 0, 32, 32 ), Rect2( 64, 0, 32, 32 ), Rect2( 96, 0, 32, 32 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "rise"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 0, 96, 32, 32 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "splat"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 0, 192, 32, 32 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "stun"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 0, 160, 32, 32 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "walk"
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 32, 32, 32 ), Rect2( 32, 32, 32, 32 ), Rect2( 64, 32, 32, 32 ), Rect2( 96, 32, 32, 32 ) ]
+}
+
 [sub_resource type="Animation" id=2]
 resource_name = "zenoJump"
-length = 3.0
+length = 5.0
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
 tracks/0/interp = 1
@@ -20,7 +130,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 3 ),
+"times": PoolRealArray( 5 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -36,7 +146,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -9 )
 flip_h = true
 region_enabled = true
-region_rect = Rect2( 0, 0, 32, 32 )
+region_rect = Rect2( 0, 160, 32, 32 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -62,4 +172,12 @@ volume_db = 8.0
 bus = "SoundEffects"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/charge = SubResource( 4 )
+anims/fall = SubResource( 5 )
+anims/idle = SubResource( 6 )
+anims/rise = SubResource( 7 )
+anims/splat = SubResource( 8 )
+anims/stun = SubResource( 3 )
+anims/walk = SubResource( 9 )
 anims/zenoJump = SubResource( 2 )

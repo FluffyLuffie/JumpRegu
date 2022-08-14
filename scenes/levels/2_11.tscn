@@ -20,4 +20,4 @@ tile_data = PoolIntArray( -524273, 0, 3, -458737, 0, 131075, -131063, 0, 3, -655
 position = Vector2( -185, 18 )
 
 [node name="Inari" parent="." instance=ExtResource( 4 )]
-position = Vector2( -120, 41 )
+position = Vector2( -120, 37 )
