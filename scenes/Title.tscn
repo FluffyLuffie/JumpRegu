@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://sprites/subTitle.png" type="Texture" id=1]
+[ext_resource path="res://sprites/title.png" type="Texture" id=2]
+
+[node name="Title" type="Node2D"]
+position = Vector2( 0, -20 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 0, 50 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 270, 16 )
+
+[node name="Node2D" type="Node2D" parent="."]
+scale = Vector2( 0.333, 0.333 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Node2D"]
+margin_left = -100.0
+margin_top = 250.0
+margin_right = 100.0
+margin_bottom = 245.0
+mouse_filter = 2
+bbcode_enabled = true
+bbcode_text = "WASD or arrow keys to move
+SPACE to jump
+ESC for menu"
+text = "WASD or arrow keys to move
+SPACE to jump
+ESC for menu"
+fit_content_height = true
+scroll_active = false

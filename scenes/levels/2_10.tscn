@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://sprites/backgrounds/0.png" type="Texture" id=1]
+[ext_resource path="res://sprites/background.png" type="Texture" id=1]
 [ext_resource path="res://tilesets/grass.tres" type="TileSet" id=2]
 
 [node name="2_10" type="Node2D"]

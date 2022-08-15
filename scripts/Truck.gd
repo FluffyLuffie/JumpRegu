@@ -47,6 +47,7 @@ func explode() -> void:
 		GameStates.spawn_player(position)
 	else:
 		var credits = load("res://scenes/Credits.tscn").instance()
+		credits.get_node("Time").text = "Time: " + str(GameStates.timer)
 		get_tree().root.add_child(credits)
 	
 	queue_free()

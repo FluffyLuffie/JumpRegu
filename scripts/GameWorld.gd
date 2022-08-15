@@ -2,8 +2,6 @@ extends Node2D
 
 onready var settings:Control = $SettingsUI
 
-var paused:bool = false
-
 func _ready() -> void:
 	# warning-ignore:return_value_discarded
 	$SettingsUI/Button.connect("pressed", self, "quit_game")
@@ -11,8 +9,8 @@ func _ready() -> void:
 # warning-ignore:unused_argument
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):
-		paused = !paused
-		get_tree().paused = paused
+		GameStates.paused = !GameStates.paused
+		get_tree().paused = GameStates.paused
 		
 		settings.visible = !settings.visible
 

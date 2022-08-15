@@ -8,6 +8,7 @@ func _on_BigChicken_body_entered(body: Node) -> void:
 	collision_layer = 0
 	collision_mask = 0
 	GameStates.cutscene = true
+	GameStates.timer_active = false
 	GameStates.player.velocity.x = 0.0
 	$AnimationPlayer.play('flash')
 	

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/PlayerLight.tscn" type="PackedScene" id=1]
-[ext_resource path="res://sprites/backgrounds/0.png" type="Texture" id=2]
+[ext_resource path="res://sprites/background.png" type="Texture" id=2]
 [ext_resource path="res://tilesets/grass.tres" type="TileSet" id=3]
 
 [node name="2_8" type="Node2D"]
