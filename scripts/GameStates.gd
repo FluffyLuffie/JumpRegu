@@ -46,8 +46,23 @@ func load_level(delta_x:int, delta_y:int) -> bool:
 		level_x = next_level_x
 		level_y = next_level_y
 		current_level = load(next_level_path).instance()
+		
+		# add plants
+		var rand: RandomNumberGenerator = RandomNumberGenerator.new()
+		rand.seed = next_level_x * 88 + next_level_y * 1144
+		var plants: TileMap = load("res://scenes/Plants.tscn").instance()
+		current_level.add_child(plants)
+		var level_tiles: TileMap = current_level.get_node("TileMap")
+		for y in range(-11, 11):
+			for x in range(-20, 20):
+				# if above a valid tile is empty
+				if level_tiles.get_cell(x, y) == -1 and level_tiles.get_cell(x, y + 1) == 0:
+					plants.set_cell(x, y, rand.randi_range(0, 7), bool(rand.randi_range(0, 1)))
+					
+		
 		game_vp.add_child(current_level)
 		game_vp.move_child(current_level, 1)
+		
 		return true
 	return false
 
