@@ -57,8 +57,9 @@ func load_level(delta_x:int, delta_y:int) -> bool:
 			for x in range(-20, 20):
 				# if above a valid tile is empty
 				if level_tiles.get_cell(x, y) == -1 and level_tiles.get_cell(x, y + 1) == 0:
-					plants.set_cell(x, y, rand.randi_range(0, 7), bool(rand.randi_range(0, 1)))
-					
+					# chance for plant
+					if rand.randi_range(0, 9) > 1:
+						plants.set_cell(x, y, rand.randi_range(0, 7), bool(rand.randi_range(0, 1)))
 		
 		game_vp.add_child(current_level)
 		game_vp.move_child(current_level, 1)
