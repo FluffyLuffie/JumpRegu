@@ -15,7 +15,7 @@ onready var ap = $AnimationPlayer
 
 var walk_speed:float = 75
 var jump_speed:float = 150
-var min_jump_speed:float = 100.0
+var min_jump_speed:float = 50.0
 var max_jump_speed:float = 450.0
 var max_jump_charge:int = 30
 var terminal_velocity:float = 450.0

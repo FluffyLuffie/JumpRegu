@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/rainyWalk.ogg-f53e3459cf051535dfbd3776623e587c.oggstr"
+
+[deps]
+
+source_file="res://music/rainyWalk.ogg"
+dest_files=[ "res://.import/rainyWalk.ogg-f53e3459cf051535dfbd3776623e587c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
