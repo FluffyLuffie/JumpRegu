@@ -5,6 +5,8 @@ var terminal_velocity:float = 450.0
 var is_active: bool = false
 var velocity: Vector2
 
+var chicken_maybe = preload("res://scenes/ChickenMaybe.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -41,13 +43,29 @@ func explode() -> void:
 	var explosion: Node2D = load("res://scenes/Explosion.tscn").instance()
 	explosion.position = position
 	explosion.get_node('Particles2D').emitting = true
-	GameStates.game_vp.add_child(explosion)
+	GameStates.current_level.add_child(explosion)
 	
 	if !GameStates.cutscene:
 		GameStates.spawn_player(position)
+		spawn_chicken(1)
 	else:
+		spawn_chicken(3)
 		var credits = load("res://scenes/Credits.tscn").instance()
 		credits.get_node("Time").text = "Time: " + str(GameStates.timer)
 		get_tree().root.add_child(credits)
 	
 	queue_free()
+
+func spawn_chicken(num: int):
+	var rand: RandomNumberGenerator = RandomNumberGenerator.new()
+	rand.randomize()
+	
+	# warning-ignore:unused_variable
+	for i in range(num):
+		var cm: RigidBody2D = chicken_maybe.instance()
+		cm.global_position = position + Vector2(i * 2, -10.0)
+		cm.apply_central_impulse(Vector2(rand.randf_range(-300, 300), rand.randf_range(-400, -200)))
+		cm.add_torque(rand.randf_range(-150, 150))
+		cm.get_node("Sprite").region_rect.position = Vector2(i * 16, 0)
+		GameStates.current_level.add_child(cm)
+	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://tilesets/grass.tres" type="TileSet" id=1]
 [ext_resource path="res://sprites/background.png" type="Texture" id=2]
@@ -24,6 +24,15 @@ tracks/0/keys = {
 "update": 1,
 "values": [ Rect2( 0, 0, 16, 16 ), Rect2( 16, 0, 16, 16 ) ]
 }
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 21.5, 305.5 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 20.5, 304.5 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 361.5, 20.5 )
 
 [node name="2_0" type="Node2D"]
 
@@ -53,5 +62,21 @@ region_rect = Rect2( 0, 0, 16, 16 )
 root_node = NodePath("../Sprite")
 autoplay = "idle"
 anims/idle = SubResource( 1 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -341.5, -113.5 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 340.5, -112.5 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -1.5, -287.5 )
+shape = SubResource( 5 )
 
 [connection signal="body_entered" from="Chicken" to="Chicken" method="_on_Chicken_body_entered"]
