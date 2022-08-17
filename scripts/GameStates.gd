@@ -2,7 +2,6 @@ extends Node
 
 var starting_level_x: int = 1
 var starting_level_y: int = 0
-var starting_pos: Vector2 = Vector2(0, 121)
 
 var directory = Directory.new()
 
@@ -26,8 +25,6 @@ var timer: float = 0.0
 
 func _ready():	
 	game_vp = get_node("/root/GameWorld/ViewportContainer/Viewport")
-	
-	spawn_player(starting_pos)
 	
 	# warning-ignore:return_value_discarded
 	load_level(starting_level_x, starting_level_y)
@@ -67,14 +64,11 @@ func load_level(delta_x:int, delta_y:int) -> bool:
 		return true
 	return false
 
-func spawn_player(pos: Vector2) -> void:
+func spawn_player(pos: Vector2 = Vector2(0, 121)) -> void:
 	player = load("res://scenes/Regu.tscn").instance()
 	player.position = pos
 	game_vp.add_child(player)
 	
 func _physics_process(delta: float) -> void:
-	if Input.is_action_pressed("left") or Input.is_action_pressed("right") or Input.is_action_pressed("jump"):
-		timer_active = true
-	
 	if timer_active && !paused:
 		timer += delta

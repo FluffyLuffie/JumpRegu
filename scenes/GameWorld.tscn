@@ -121,5 +121,18 @@ margin_right = -10.0
 margin_bottom = -10.0
 text = "Quit"
 
+[node name="FullScreen" type="CheckBox" parent="SettingsUI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -49.0
+margin_top = -77.0
+margin_right = 49.0
+margin_bottom = -53.0
+pressed = true
+text = "Full Screen"
+
 [connection signal="value_changed" from="SettingsUI/SoundEffectsSlider" to="SettingsUI" method="_on_SoundEffectsSlider_value_changed"]
 [connection signal="value_changed" from="SettingsUI/MusicSlider" to="SettingsUI" method="_on_MusicSlider_value_changed"]
+[connection signal="pressed" from="SettingsUI/FullScreen" to="SettingsUI" method="_on_FullScreen_pressed"]

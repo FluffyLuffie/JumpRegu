@@ -13,3 +13,7 @@ func _on_SoundEffectsSlider_value_changed(value: float) -> void:
 
 func _on_MusicSlider_value_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(music_bus, linear2db(value))
+
+
+func _on_FullScreen_pressed() -> void:
+	OS.window_fullscreen = $FullScreen.pressed
