@@ -37,8 +37,8 @@ func _physics_process(delta):
 		return
 	
 	# teleport cheat
-	if Input.is_action_just_pressed("teleport"):
-		position = get_global_mouse_position()
+	#if Input.is_action_just_pressed("teleport"):
+	#	position = get_global_mouse_position()
 	
 	# warning-ignore:return_value_discarded
 	var next_velocity: Vector2 = move_and_slide(velocity, Vector2.UP)
