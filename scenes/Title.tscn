@@ -9,10 +9,11 @@ position = Vector2( 0, -20 )
 script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -20 )
 texture = ExtResource( 2 )
 
 [node name="Sprite2" type="Sprite" parent="."]
-position = Vector2( 0, 50 )
+position = Vector2( 0, 30 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 270, 16 )
@@ -21,15 +22,15 @@ region_rect = Rect2( 0, 0, 270, 16 )
 scale = Vector2( 0.333, 0.333 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Node2D"]
-margin_left = -100.0
-margin_top = 204.0
-margin_right = 100.0
-margin_bottom = 249.0
+margin_left = -240.0
+margin_top = 201.0
+margin_right = 240.0
+margin_bottom = 303.0
 mouse_filter = 2
 bbcode_enabled = true
-bbcode_text = "WASD or arrow keys to move
+bbcode_text = "[center]WASD or arrow keys to move
 SPACE to jump
-ESC for menu"
+ESC for menu[/center]"
 text = "WASD or arrow keys to move
 SPACE to jump
 ESC for menu"
@@ -37,10 +38,14 @@ fit_content_height = true
 scroll_active = false
 
 [node name="Button" type="Button" parent="."]
-margin_left = -25.0
-margin_top = 97.0
-margin_right = 25.0
-margin_bottom = 117.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -43.0
+margin_top = 114.0
+margin_right = 44.0
+margin_bottom = 153.0
 text = "START"
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

@@ -45,70 +45,86 @@ margin_right = 1920.0
 margin_bottom = 1080.0
 script = ExtResource( 3 )
 
+[node name="ColorRect" type="ColorRect" parent="SettingsUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.705882 )
+
 [node name="Title" type="Label" parent="SettingsUI"]
 anchor_left = 0.5
-anchor_top = 0.05
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.05
-margin_left = -50.0
-margin_right = 50.0
+anchor_bottom = 0.5
+margin_left = -60.0
+margin_top = -407.0
+margin_right = 60.0
+margin_bottom = -374.0
 text = "Settings"
 align = 1
 
 [node name="SE" type="Label" parent="SettingsUI"]
 anchor_left = 0.5
-anchor_top = 0.2
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.2
-margin_left = -50.0
-margin_right = 50.0
-text = "Sound Effects"
+anchor_bottom = 0.5
+margin_left = -97.0
+margin_top = -292.0
+margin_right = 98.0
+margin_bottom = -18.0
+text = "Sound Effects
+効果音"
 align = 1
 
 [node name="SoundEffectsSlider" type="HSlider" parent="SettingsUI"]
 anchor_left = 0.5
-anchor_top = 0.22
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.22
+anchor_bottom = 0.5
 margin_left = -300.0
+margin_top = -209.0
 margin_right = 300.0
+margin_bottom = -193.0
 max_value = 1.0
 step = 0.05
 
 [node name="Music" type="Label" parent="SettingsUI"]
 anchor_left = 0.5
-anchor_top = 0.35
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.35
+anchor_bottom = 0.5
 margin_left = -50.0
+margin_top = -130.0
 margin_right = 50.0
-text = "Music"
+margin_bottom = -61.0
+text = "Music
+音楽"
 align = 1
 
 [node name="MusicSlider" type="HSlider" parent="SettingsUI"]
 anchor_left = 0.5
-anchor_top = 0.37
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.37
+anchor_bottom = 0.5
 margin_left = -300.0
+margin_top = -48.0
 margin_right = 300.0
+margin_bottom = -32.0
 max_value = 1.0
 step = 0.05
 tick_count = 5
 ticks_on_borders = true
 
-[node name="Controls" type="Label" parent="SettingsUI"]
+[node name="FullScreen" type="CheckBox" parent="SettingsUI"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -148.5
-margin_top = -15.5
-margin_right = 148.5
-margin_bottom = 15.5
-text = "WASD or arrow keys to move.
-Space to jump."
-align = 1
+margin_left = -216.0
+margin_top = 60.0
+margin_right = 217.0
+margin_bottom = 101.0
+pressed = true
+text = "Full Screen　フルスクリーン"
 
 [node name="Button" type="Button" parent="SettingsUI"]
 anchor_left = 1.0
@@ -120,18 +136,6 @@ margin_top = -50.0
 margin_right = -10.0
 margin_bottom = -10.0
 text = "Quit"
-
-[node name="FullScreen" type="CheckBox" parent="SettingsUI"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -49.0
-margin_top = -77.0
-margin_right = 49.0
-margin_bottom = -53.0
-pressed = true
-text = "Full Screen"
 
 [connection signal="value_changed" from="SettingsUI/SoundEffectsSlider" to="SettingsUI" method="_on_SoundEffectsSlider_value_changed"]
 [connection signal="value_changed" from="SettingsUI/MusicSlider" to="SettingsUI" method="_on_MusicSlider_value_changed"]
