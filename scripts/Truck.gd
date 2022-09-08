@@ -50,9 +50,11 @@ func explode() -> void:
 		spawn_chicken(1)
 	else:
 		spawn_chicken(3)
-		var credits = load("res://scenes/Credits.tscn").instance()
+		var credits: Node2D = load("res://scenes/Credits.tscn").instance()
 		credits.get_node("Time").text = "Time: " + str(GameStates.timer)
-		get_tree().root.add_child(credits)
+		var game_world: Node2D = get_node("/root/GameWorld")
+		game_world.add_child(credits)
+		game_world.move_child(credits, game_world.get_child_count() - 2)
 	
 	queue_free()
 
